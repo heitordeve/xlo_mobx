@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
+import 'package:xlo_mobx/screens/base/base_screen.dart';
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeParse();
   runApp(MyApp());
-  
-   await Parse().initialize(
+}
+
+Future<void> initializeParse() async {
+  await Parse().initialize(
       '4BmVP6xGPeJKEW0zAfJfsDLXAL9oPTv54dEXBKbk',
       'https://parseapi.back4app.com/',
-    clientKey: 'gfadhx4jinAQc6VfqMjCfHT5Qjyn8sPJiN1vXHRZ',
-    autoSendSessionId: true,
-    debug: true
+      clientKey: 'gfadhx4jinAQc6VfqMjCfHT5Qjyn8sPJiN1vXHRZ',
+      autoSendSessionId: true,
+      debug: true
   );
-
-   final category = ParseObject('Categories')
-    ..set('Title', 'Shorts')
-    ..set('Position', 2);
-
-   final response = await category.save();
-
-   print(response.success);
 }
 
 class MyApp extends StatelessWidget {
@@ -26,12 +23,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'XLO',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Container(),
+      home: BaseScreen(),
     );
   }
 }
