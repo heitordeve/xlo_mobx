@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:xlo_mobx/screens/base/base_screen.dart';
+
+import 'stores/page_store.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await initializeParse();
+  setupLocators();
   runApp(MyApp());
+}
+
+void setupLocators() {
+  GetIt.I.registerSingleton(PageStore());
 }
 
 Future<void> initializeParse() async {
